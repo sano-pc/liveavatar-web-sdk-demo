@@ -1,6 +1,20 @@
 import { API_KEY, API_URL, AVATAR_ID } from "../secrets";
 
 export async function POST() {
+  // Validate API_KEY is configured
+  if (!API_KEY) {
+    return new Response(
+      JSON.stringify({
+        error:
+          "LIVEAVATAR_API_KEY is not configured. Please copy .env.example to .env.local and set your API key.",
+      }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+  }
+
   let session_token = "";
   let session_id = "";
   try {
@@ -16,22 +30,15 @@ export async function POST() {
       }),
     });
     if (!res.ok) {
-      const error = await res.json();
-      if (error.error) {
-        const resp = await res.json();
-        const errorMessage =
-          resp.data[0].message ?? "Failed to retrieve session token";
-        return new Response(JSON.stringify({ error: errorMessage }), {
-          status: res.status,
-        });
-      }
-
-      return new Response(
-        JSON.stringify({ error: "Failed to retrieve session token" }),
-        {
-          status: res.status,
-        },
-      );
+      const resp = await res.json();
+      const errorMessage =
+        resp?.data?.[0]?.message ??
+        resp?.message ??
+        "Failed to retrieve session token";
+      console.error("API Error Response:", resp);
+      return new Response(JSON.stringify({ error: errorMessage }), {
+        status: res.status,
+      });
     }
     const data = await res.json();
     console.log(data);

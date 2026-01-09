@@ -5,17 +5,47 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": [".next/**", "!.next/cache/**"],
+      "env": [
+        "LIVEAVATAR_API_KEY",
+        "LIVEAVATAR_API_URL",
+        "LIVEAVATAR_AVATAR_ID",
+        "LIVEAVATAR_VOICE_ID",
+        "LIVEAVATAR_CONTEXT_ID",
+        "LIVEAVATAR_LANGUAGE",
+        "ELEVENLABS_API_KEY",
+        "OPENAI_API_KEY"
+      ]
     },
     "lint": {
-      "dependsOn": ["^lint"]
+      "dependsOn": ["^lint"],
+      "env": [
+        "LIVEAVATAR_API_KEY",
+        "LIVEAVATAR_API_URL",
+        "LIVEAVATAR_AVATAR_ID",
+        "LIVEAVATAR_VOICE_ID",
+        "LIVEAVATAR_CONTEXT_ID",
+        "LIVEAVATAR_LANGUAGE",
+        "ELEVENLABS_API_KEY",
+        "OPENAI_API_KEY"
+      ]
     },
     "typecheck": {
       "dependsOn": ["^build", "^typecheck"]
     },
     "dev": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "env": [
+        "LIVEAVATAR_API_KEY",
+        "LIVEAVATAR_API_URL",
+        "LIVEAVATAR_AVATAR_ID",
+        "LIVEAVATAR_VOICE_ID",
+        "LIVEAVATAR_CONTEXT_ID",
+        "LIVEAVATAR_LANGUAGE",
+        "ELEVENLABS_API_KEY",
+        "OPENAI_API_KEY"
+      ]
     },
     "test": {
       "dependsOn": ["^test"]
