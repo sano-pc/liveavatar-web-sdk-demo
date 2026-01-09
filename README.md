@@ -1,20 +1,20 @@
-## LiveAvatar Web Resources
+## LiveAvatar Web リソース
 
-This repository contains the web resources for LiveAvatar.
+このリポジトリには、LiveAvatarのWebリソースが含まれています。
 
-### Packages
+### パッケージ
 
-We offer the following web SDKs to help you quickly build with Live Avatar.
+Live Avatarを使って素早く構築するために、以下のWeb SDKを提供しています。
 
-- `@heygen/liveavatar-web-sdk`: [The LiveAvatar Web SDK](https://www.npmjs.com/package/@heygen/liveavatar-web-sdk)
+- `@heygen/liveavatar-web-sdk`: [LiveAvatar Web SDK](https://www.npmjs.com/package/@heygen/liveavatar-web-sdk)
 
-### Demos
+### デモ
 
-Try out our demos locally to see how it works and start off your own projects with.
+デモをローカルで試して、動作を確認し、自分のプロジェクトを始めましょう。
 
-- `apps/demo`: [The LiveAvatar Web Demo](https://github.com/heygen-com/liveavatar-web-sdk/tree/master/apps/demo)
+- `apps/demo`: [LiveAvatar Webデモ](https://github.com/heygen-com/liveavatar-web-sdk/tree/master/apps/demo)
 
-### Additional Resources
+### 追加リソース
 
-- LiveAvatar Website: [https://liveavatar.com](https://liveavatar.com)
-- API Documentation: [https://docs.liveavatar.com](https://docs.liveavatar.com)
+- LiveAvatar Webサイト: [https://liveavatar.com](https://liveavatar.com)
+- APIドキュメント: [https://docs.liveavatar.com](https://docs.liveavatar.com)
