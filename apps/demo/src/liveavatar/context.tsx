@@ -194,6 +194,25 @@ export const LiveAvatarContextProvider = ({
   const { isUserTalking, isAvatarTalking } = useTalkingState(sessionRef);
   // const { messages } = useChatHistoryState(sessionRef);
 
+  // Cleanup on unmount or page unload
+  useEffect(() => {
+    const session = sessionRef.current;
+    const handleBeforeUnload = () => {
+      if (session) {
+        session.stop();
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      if (session) {
+        session.stop();
+      }
+    };
+  }, []);
+
   return (
     <LiveAvatarContext.Provider
       value={{

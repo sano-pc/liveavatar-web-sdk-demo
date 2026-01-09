@@ -31,6 +31,7 @@ const LiveAvatarSessionComponent: React.FC<{
   onSessionStopped: () => void;
 }> = ({ mode, onSessionStopped }) => {
   const [message, setMessage] = useState("");
+  const isDevelopment = process.env.NODE_ENV === "development";
   const {
     sessionState,
     isStreamReady,
@@ -111,73 +112,86 @@ const LiveAvatarSessionComponent: React.FC<{
 
   return (
     <div className="w-[1080px] max-w-full h-full flex flex-col items-center justify-center gap-4 py-4">
-      <div className="relative w-full aspect-video overflow-hidden flex flex-col items-center justify-center">
+      <div className="relative w-full aspect-video overflow-hidden flex flex-col items-center justify-center bg-gray-900">
+        {!isStreamReady && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
+            <div className="w-16 h-16 border-4 border-gray-700 border-t-white rounded-full animate-spin"></div>
+            <p className="text-white text-sm">Loading avatar...</p>
+          </div>
+        )}
         <video
           ref={videoRef}
           autoPlay
           playsInline
           className="w-full h-full object-contain"
+          style={{ opacity: isStreamReady ? 1 : 0 }}
         />
-        <button
-          className="absolute bottom-4 right-4 bg-white text-black px-4 py-2 rounded-md"
-          onClick={() => stopSession()}
-        >
-          Stop
-        </button>
-      </div>
-      <div className="w-full h-full flex flex-col items-center justify-center gap-4">
-        <p>Session state: {sessionState}</p>
-        <p>Connection quality: {connectionQuality}</p>
-        {mode === "FULL" && (
-          <p>User talking: {isUserTalking ? "true" : "false"}</p>
+        {isDevelopment && (
+          <button
+            className="absolute bottom-4 right-4 bg-white text-black px-4 py-2 rounded-md"
+            onClick={() => stopSession()}
+          >
+            Stop
+          </button>
         )}
-        <p>Avatar talking: {isAvatarTalking ? "true" : "false"}</p>
-        {mode === "FULL" && VoiceChatComponents}
+      </div>
+      {isDevelopment && (
+        <div className="w-full h-full flex flex-col items-center justify-center gap-4">
+          <p>Session state: {sessionState}</p>
+          <p>Connection quality: {connectionQuality}</p>
+          {mode === "FULL" && (
+            <p>User talking: {isUserTalking ? "true" : "false"}</p>
+          )}
+          <p>Avatar talking: {isAvatarTalking ? "true" : "false"}</p>
+          {mode === "FULL" && VoiceChatComponents}
+          <Button
+            onClick={() => {
+              keepAlive();
+            }}
+          >
+            Keep Alive
+          </Button>
+          <div className="w-full h-full flex flex-row items-center justify-center gap-4">
+            <Button
+              onClick={() => {
+                startListening();
+              }}
+            >
+              Start Listening
+            </Button>
+            <Button
+              onClick={() => {
+                stopListening();
+              }}
+            >
+              Stop Listening
+            </Button>
+            <Button
+              onClick={() => {
+                interrupt();
+              }}
+            >
+              Interrupt
+            </Button>
+          </div>
+        </div>
+      )}
+      <div className="w-full h-full flex flex-row items-center justify-center gap-4">
+        <input
+          type="text"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          className="w-[400px] bg-white text-black px-4 py-2 rounded-md"
+        />
         <Button
           onClick={() => {
-            keepAlive();
+            sendMessage(message);
+            setMessage("");
           }}
         >
-          Keep Alive
+          Send
         </Button>
-        <div className="w-full h-full flex flex-row items-center justify-center gap-4">
-          <Button
-            onClick={() => {
-              startListening();
-            }}
-          >
-            Start Listening
-          </Button>
-          <Button
-            onClick={() => {
-              stopListening();
-            }}
-          >
-            Stop Listening
-          </Button>
-          <Button
-            onClick={() => {
-              interrupt();
-            }}
-          >
-            Interrupt
-          </Button>
-        </div>
-        <div className="w-full h-full flex flex-row items-center justify-center gap-4">
-          <input
-            type="text"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            className="w-[400px] bg-white text-black px-4 py-2 rounded-md"
-          />
-          <Button
-            onClick={() => {
-              sendMessage(message);
-              setMessage("");
-            }}
-          >
-            Send
-          </Button>
+        {isDevelopment && (
           <Button
             onClick={() => {
               repeat(message);
@@ -186,7 +200,7 @@ const LiveAvatarSessionComponent: React.FC<{
           >
             Repeat
           </Button>
-        </div>
+        )}
       </div>
     </div>
   );
