@@ -2,11 +2,6 @@
 
 ローカル環境での開発方法と本番ビルドについて説明します。
 
-## 前提条件
-
-- Node.js 18以上
-- pnpm 9以上
-
 ## セットアップ
 
 ### 1. リポジトリのクローン
@@ -87,36 +82,3 @@ pnpm start
 ```
 
 本番モードでサーバーが起動します（デフォルトはポート3000）。
-
-## プロジェクト構造
-
-```
-liveavatar-web-sdk/
-├── apps/
-│   └── demo/          # デモアプリケーション（Next.js）
-├── packages/
-│   └── js-sdk/        # LiveAvatar Web SDK
-└── doc/               # ドキュメント
-```
-
-## トラブルシューティング
-
-### pnpmがインストールされていない場合
-
-```bash
-npm install -g pnpm
-```
-
-### 依存関係エラーが発生する場合
-
-```bash
-pnpm install --force
-```
-
-### ポートが使用中の場合
-
-`apps/demo/package.json` の `dev` スクリプトでポート番号を変更できます：
-
-```json
-"dev": "next dev --port 3003"
-```

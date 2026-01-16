@@ -12,7 +12,8 @@ Live Avatarを使って素早く構築するために、以下のWeb SDKを提�
 
 デモをローカルで試して、動作を確認し、自分のプロジェクトを始めましょう。
 
-- `apps/demo`: [LiveAvatar Webデモ](https://github.com/heygen-com/liveavatar-web-sdk/tree/master/apps/demo)
+- **公開デモサイト**: https://liveavatarwebsdkdemo.vercel.app/
+- `apps/demo`: [LiveAvatar Webデモ（ソースコード）](https://github.com/heygen-com/liveavatar-web-sdk/tree/master/apps/demo)
 
 ### 追加リソース
 
