@@ -1,36 +1,35 @@
 # LiveAvatar Web SDK
 
-## About
+## 概要
 
-This is offical LiveAvatar supported client-side SDK.
-This SDK library manages various LiveAvatar sessions, supporting the session initiation,
-session management, and session cleanup.
+これはLiveAvatarの公式クライアント側SDKです。
+このSDKライブラリは、セッションの開始、管理、クリーンアップをサポートし、さまざまなLiveAvatarセッションを管理します。
 
-## API Documentation
+## APIドキュメント
 
-Please refer to us here https://docs.liveavatar.com
+詳細なAPIドキュメントはこちらをご参照ください：https://docs.liveavatar.com
 
-## Installation
+## インストール
 
-Install the package in your project through package manager.
+パッケージマネージャーを使用してプロジェクトにパッケージをインストールします。
 
 ```bash
 npm install @heygen/liveavatar-web-sdk
-# or
+# または
 pnpm install @heygen/liveavatar-web-sdk
 ```
 
-## Usage
+## 使い方
 
-This library is meant for development use in various client-side facing JavaScript projects.
-It's tailored to manage LiveAvatar sessions, handling the complexities of starting, stopping and various avatar actions. With just the session token, we help focus on the session complexity so you focus on building something great.
+このライブラリは、さまざまなクライアント側のJavaScriptプロジェクトでの開発用に設計されています。
+LiveAvatarセッションの管理に特化しており、セッションの開始、停止、さまざまなアバターアクションの複雑さを処理します。セッショントークンだけで、セッションの複雑さに焦点を当てるため、あなたは素晴らしいものを構築することに集中できます。
 
-## Example Usage
+## 使用例
 
 ```ts
 import { LiveAvatarSession } from "@heygen/liveavatar-web-sdk";
 
-// Make a backend call to grab the sessionToken
+// バックエンドを呼び出してsessionTokenを取得
 const { sessionToken } = await myBackendCallForSessionToken();
 const userConfig = {
   voiceChat: true,
@@ -38,17 +37,17 @@ const userConfig = {
 
 const session = new LiveAvatarSession(sessionToken, userConfig);
 
-// Start the session
+// セッションを開始
 await session.start();
 
-// Build something great with LiveAvatar
+// LiveAvatarで素晴らしいものを構築
 
-// Close the session
+// セッションを終了
 await session.stop();
 ```
 
-## License
+## ライセンス
 
-LiveAvatar Web SDK is licensed under the MIT License.
+LiveAvatar Web SDKはMITライセンスの下でライセンスされています。
 
-Please refer to the LICENSE file for more information.
+詳細についてはLICENSEファイルをご参照ください。
